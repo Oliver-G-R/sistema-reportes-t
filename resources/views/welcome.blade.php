@@ -906,10 +906,69 @@
     @endif
 </head>
 
-<body class="">
-    <h1 class=" text-red-200">
-        Holaaaasss
-    </h1>
+<body class="bg-image-lab">
+    <main class=" max-w-2xl m-auto flex justify-center items-center flex-col h-screen">
+        <h1 class="text-white font-semibold text-2xl mb-4">
+            Reporta un problema dentro del taller
+        </h1>
+        <form class=" bg-white/40 p-8 backdrop-blur-lg rounded-lg w-[600px] max-md:w-11/12">
+            <div class="mb-5">
+                <label for="nombre" class="block mb-2 text-sm font-medium  text-white">
+                    Nombre
+                </label>
+                <input type="text" id="nombre"
+                    class=" border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white "
+                    placeholder="name@flowbite.com" required />
+            </div>
+            <div class="mb-5">
+                <label for="descripcion" class="block mb-2 text-sm font-medium  text-white">
+                    Descripción
+                </label>
+                <textarea type="text" id="descripcion"
+                    class=" border text-sm rounded-lg resize-none h-32  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white "
+                    placeholder="..."></textarea>
+            </div>
+            <div class="mb-5">
+                <label for="descripcion" class="block mb-2 text-sm font-medium  text-white">
+                    Departamento
+                </label>
+                <input type="text" id="descripcion"
+                    class=" border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white "
+                    placeholder="Ab" />
+            </div>
+            <div class="mb-5">
+                <label for="telefono" class="block mb-2 text-sm font-medium  text-white">
+                    Teléfono
+                </label>
+                <input type="tel" id="telefono"
+                    class=" border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white "
+                    placeholder="tel" />
+            </div>
+            <div>
+                <div class="mb-5">
+                    <label for="fecha" class="block mb-2 text-sm font-medium  text-white">
+                        Fecha
+                    </label>
+                    <input type="date" id="fecha"
+                        class=" border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white " />
+                </div>
+                <div class="mb-5">
+                    <label for="hora" class="block mb-2 text-sm font-medium  text-white">
+                        Hora
+                    </label>
+                    <input type="time" id="hora"
+                        class=" border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white " />
+                </div>
+
+
+            </div>
+
+
+            <button type="submit"
+                class="w-full text-white  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm  px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 ">Enviar</button>
+        </form>
+
+    </main>
 </body>
 
 </html>
