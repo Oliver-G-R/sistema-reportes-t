@@ -22,6 +22,6 @@ class Reporte extends Model
 
     public function tecnico(): BelongsTo
     {
-        return $this->belongsTo(Tecnico::class);
+        return $this->belongsTo(Tecnico::class, 'id_tecnico');
     }
 }

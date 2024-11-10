@@ -1,4 +1,14 @@
-<form class="flex items-center  max-w-sm mx-auto my-4">
+@props([
+    'reports' => [],
+    'tec' => [],
+])
+
+
+@php
+    use Carbon\Carbon;
+@endphp
+
+<form action="{{ route('reports.filter', 'fecha') }}" method="GET" class="flex items-center  max-w-sm mx-auto my-4">
     <div class="relative w-full">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg class="w-4 h-4 text-gray-500 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -7,7 +17,7 @@
                     d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
             </svg>
         </div>
-        <input type="date"
+        <input name="fecha" type="date"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
             required />
     </div>
@@ -42,39 +52,100 @@
                 <th scope="col" class="px-6 py-3">
                     Hora
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="px-6 py-3 ">
                     Tecnico
+                </th>
+                <th scope="col" class="px-6 py-3 w-[200px]">
+                    Acciones
                 </th>
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-white border-b ">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                    Angie
-                </th>
-                <td class="px-6 py-4">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </td>
-                <td class="px-6 py-4">
-                    Computo B
-                </td>
-                <td class="px-6 py-4">
-                    +52 1 55 1234 5678
-                </td>
-                <td class="px-6 py-4">
-                    2021-10-10
-                </td>
-                <td class="px-6 py-4">
-                    10:00
-                </td>
-                <td class="px-6 py-4">
-                    <button class="text-sm font-medium text-black py-2 px-4  border-2 rounded-lg border-blue-500">
-                        Asignar
-                    </button>
-                </td>
-            </tr>
+            @forelse ($reports as $report)
+                <tr class="bg-white border-b ">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                        {{ $report->nombre }}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{ $report->descripcion }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $report->departamento }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $report->telefono }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $report->fecha }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ Carbon::parse($report->hora)->format('h:i A') }}
+                    </td>
+
+                    <td class="px-6 py-4">
+                        @if ($report->tecnico)
+                            <p class="  text-green-500 font-semibold">
+                                {{ $report->tecnico->nombre }}
+                            </p>
+                        @else
+                            <p class="text-red-500 font-semibold">
+                                Sin asignar
+                            </p>
+                        @endif
+                    </td>
+
+                    <td class="px-6 py-4 ">
+
+                        <form action="{{ route('tecnico.asignar', ['id_reporte' => $report->id, 'id_tecnico']) }}"
+                            method="GET" class="flex items-center gap-3">
+                            <select name="id_tecnico" data-report-id="{{ $report->id }}" id="tecnicos-select"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 ">
+
+                                <option selected disabled>Asignar</option>
+                                @foreach ($tec as $tecnico)
+                                    <option value="{{ $tecnico->id }}">{{ $tecnico->nombre }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit">
+                                Guardar
+                            </button>
+                        </form>
 
 
+                    </td>
+
+
+                </tr>
+            @empty
+                <tr class="bg-white border-b ">
+                    <td class="px-6 py-4" colspan="7">
+                        No hay reportes
+                    </td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>
+
+
+<script>
+    // (async () => {
+    //     const $select = document.querySelectorAll("#tecnicos-select");
+    //     const response = await fetch("{{ route('tecnicos.index') }}");
+    //     const tecnicos = await response.json();
+    //     console.log(tecnicos);
+    //     if (response.ok) {
+    //         $select.forEach((select) => {
+    //             tecnicos.forEach((tecnico) => {
+    //                 const option = document.createElement("option");
+    //                 option.value = tecnico.id;
+    //                 option.textContent = tecnico.nombre;
+    //                 select.appendChild(option);
+    //             });
+    //         });
+
+    //     }
+
+    //     console.log(tecnicos);
+    // })();
+</script>

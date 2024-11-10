@@ -911,54 +911,74 @@
         <h1 class="text-white font-semibold text-2xl mb-4">
             Reporta un problema dentro del taller
         </h1>
-        <form class=" bg-white/40 p-8 backdrop-blur-lg rounded-lg w-[600px] max-md:w-11/12">
+        <form action="{{ route('report.store') }}" method="POST"
+            class=" bg-white/40 p-8 backdrop-blur-lg rounded-lg w-[600px] max-md:w-11/12">
+            @csrf
             <div class="mb-5">
                 <label for="nombre" class="block mb-2 text-sm font-medium  text-white">
                     Nombre
                 </label>
-                <input type="text" id="nombre"
+                <input type="text" id="nombre" name="nombre"
                     class=" border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white "
                     placeholder="name@flowbite.com" required />
+                @error('nombre')
+                    <div class=" text-red-500">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-5">
                 <label for="descripcion" class="block mb-2 text-sm font-medium  text-white">
                     Descripción
                 </label>
-                <textarea type="text" id="descripcion"
+                <textarea name="descripcion" type="text" id="descripcion"
                     class=" border text-sm rounded-lg resize-none h-32  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white "
                     placeholder="..."></textarea>
+                @error('descripcion')
+                    <div class=" text-red-500">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-5">
                 <label for="descripcion" class="block mb-2 text-sm font-medium  text-white">
                     Departamento
                 </label>
-                <input type="text" id="descripcion"
+                <input type="text" name="departamento" id="descripcion"
                     class=" border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white "
                     placeholder="Ab" />
+                @error('departamento')
+                    <div class=" text-red-500">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-5">
                 <label for="telefono" class="block mb-2 text-sm font-medium  text-white">
                     Teléfono
                 </label>
-                <input type="tel" id="telefono"
+                <input name="telefono" type="tel" id="telefono"
                     class=" border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white "
                     placeholder="tel" />
+                @error('telefono')
+                    <div class=" text-red-500">{{ $message }}</div>
+                @enderror
             </div>
             <div>
                 <div class="mb-5">
                     <label for="fecha" class="block mb-2 text-sm font-medium  text-white">
                         Fecha
                     </label>
-                    <input type="date" id="fecha"
+                    <input name="fecha" type="date" id="fecha"
                         class=" border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white " />
                 </div>
+                @error('fecha')
+                    <div class=" text-red-500">{{ $message }}</div>
+                @enderror
                 <div class="mb-5">
                     <label for="hora" class="block mb-2 text-sm font-medium  text-white">
                         Hora
                     </label>
-                    <input type="time" id="hora"
+                    <input name="hora" type="time" id="hora"
                         class=" border text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white " />
                 </div>
+                @error('hora')
+                    <div class=" text-red-500">{{ $message }}</div>
+                @enderror
 
 
             </div>
