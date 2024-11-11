@@ -103,7 +103,8 @@
 
                                 <option selected disabled>Asignar</option>
                                 @foreach ($tec as $tecnico)
-                                    <option value="{{ $tecnico->id }}">{{ $tecnico->nombre }}</option>
+                                    <option value="{{ $tecnico->id }}">{{ $tecnico->nombre }} - {{ $tecnico->area }}
+                                    </option>
                                 @endforeach
                             </select>
                             <button type="submit">
